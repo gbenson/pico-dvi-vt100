@@ -1,3 +1,4 @@
+if (GBENSON_BUILD_ALL)
 if (NOT PICO_RISCV)
 	# Arm assembly needs porting to RISC-V
 	add_subdirectory(bad_apple)
@@ -6,7 +7,11 @@ add_subdirectory(colour_terminal)
 add_subdirectory(christmas_snowflakes)
 add_subdirectory(dht_logging)
 add_subdirectory(dual_display)
+endif()  # GBENSON_BUILD_ALL
+
 add_subdirectory(hello_dvi)
+
+if (GBENSON_BUILD_ALL)
 add_subdirectory(mandelbrot)
 add_subdirectory(moon)
 add_subdirectory(sprite_bounce)
@@ -20,3 +25,4 @@ if (PICO_RP2040)
 	add_subdirectory(vista-palette)
 endif()
 add_subdirectory(mandel-full)
+endif()  # GBENSON_BUILD_ALL
