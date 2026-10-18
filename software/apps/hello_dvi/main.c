@@ -12,13 +12,13 @@
 #include "dvi_serialiser.h"
 #include "common_dvi_pin_configs.h"
 
-#include "testcard_320x240_rgb565.h"
+#include "testcard_400x240_rgb565.h"
 
 // DVDD 1.2V (1.1V seems ok too)
-#define FRAME_WIDTH 320
+#define FRAME_WIDTH 400
 #define FRAME_HEIGHT 240
 #define VREG_VSEL VREG_VOLTAGE_1_20
-#define DVI_TIMING dvi_timing_640x480p_60hz
+#define DVI_TIMING dvi_timing_800x480p_60hz
 
 struct dvi_inst dvi0;
 
@@ -51,11 +51,11 @@ int main() {
 	while (true) {
 		for (uint y = 0; y < FRAME_HEIGHT; ++y) {
 			uint y_scroll = (y + frame_ctr) % FRAME_HEIGHT;
-			const uint16_t *scanline = &((const uint16_t*)testcard_320x240)[y_scroll * FRAME_WIDTH];
+			const uint16_t *scanline = &((const uint16_t*)testcard_400x240)[y_scroll * FRAME_WIDTH];
 			queue_add_blocking_u32(&dvi0.q_colour_valid, &scanline);
 			while (queue_try_remove_u32(&dvi0.q_colour_free, &scanline))
 				;
 		}
-		++frame_ctr;
+		// ++frame_ctr;
 	}
 }
