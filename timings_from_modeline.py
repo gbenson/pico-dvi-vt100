@@ -22,13 +22,22 @@ refresh, modeline = (
     "1024 1072 1104 1184  600 603 613 619 +hsync -vsync",
 )
 
-# $ cvt 1024 600 30
-# # 1024x600 29.80 Hz (CVT) hsync: 18.36 kHz; pclk: 23.50 MHz
-# Modeline "1024x600_30.00"   23.50  1024 1056 1152 1280  600 603 613 616 -hsync +vsync
+# # $ cvt 1024 600 30
+# # # 1024x600 29.80 Hz (CVT) hsync: 18.36 kHz; pclk: 23.50 MHz
+# # Modeline "1024x600_30.00"   23.50  1024 1056 1152 1280  600 603 613 616 -hsync +vsync
+# refresh, modeline = (
+#     29.80,
+#     "1024 1056 1152 1280  600 603 613 616 -hsync +vsync",
+# )
+
+# $ cvt 512 300 60
+# # 512x300 59.34 Hz (CVT) hsync: 18.75 kHz; pclk: 12.00 MHz
+# Modeline "512x300_60.00"   12.00  512 528 576 640  300 303 313 316 -hsync +vsync
 refresh, modeline = (
-    29.80,
-    "1024 1056 1152 1280  600 603 613 616 -hsync +vsync",
+    59.34,
+    "512 528 576 640  300 303 313 316 -hsync +vsync",
 )
+
 
 modeline = modeline.split()
 hsync = {"-hsync": False, "+hsync": True}[modeline[-2]]
@@ -36,17 +45,17 @@ vsync = {"-vsync": False, "+vsync": True}[modeline[-1]]
 (hdisplay, hsyncstart, hsyncend, htotal,
  vdisplay, vsyncstart, vsyncend, vtotal) = map(int, modeline[:-2])
 
-print(f"\t.h_sync_polarity = {str(hsync).lower()}")
-print(f"\t.h_front_porch   = {hsyncstart - hdisplay}")
-print(f"\t.h_sync_width    = {hsyncend - hsyncstart}")
-print(f"\t.h_back_porch    = {htotal - hsyncend}")
-print(f"\t.h_active_pixels = {hdisplay}")
+print(f"\t.h_sync_polarity = {str(hsync).lower()},")
+print(f"\t.h_front_porch   = {hsyncstart - hdisplay},")
+print(f"\t.h_sync_width    = {hsyncend - hsyncstart},")
+print(f"\t.h_back_porch    = {htotal - hsyncend},")
+print(f"\t.h_active_pixels = {hdisplay},")
 print()
-print(f"\t.v_sync_polarity = {str(vsync).lower()}")
-print(f"\t.v_front_porch   = {vsyncstart - vdisplay}")
-print(f"\t.v_sync_width    = {vsyncend - vsyncstart}")
-print(f"\t.v_back_porch    = {vtotal - vsyncend}")
-print(f"\t.v_active_lines  = {vdisplay}")
+print(f"\t.v_sync_polarity = {str(vsync).lower()},")
+print(f"\t.v_front_porch   = {vsyncstart - vdisplay},")
+print(f"\t.v_sync_width    = {vsyncend - vsyncstart},")
+print(f"\t.v_back_porch    = {vtotal - vsyncend},")
+print(f"\t.v_active_lines  = {vdisplay},")
 print()
 print(f"\t.bit_clk_khz     = {int(htotal * vtotal * refresh * 10 / 1000)}")
-print(f"\t.bit_clk_khz     = {int(23.50 * 10 * 1000)}")
+print(f"\t.bit_clk_khz     = {int(43.75 * 10 * 1000)}")
