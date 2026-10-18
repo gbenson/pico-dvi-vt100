@@ -38,10 +38,32 @@ refresh, modeline = (
     "512 528 576 640  300 303 313 316 -hsync +vsync",
 )
 
+# https://www.ultrasemi.com/en/tool/video_timing_calculator
+# CVT
+# Modeline "1024x600_59.85" 490 1024 1064 1168 1312 600 603 613 624 -HSync +VSync
+# CVT-RB
+# Modeline "1024x600_59.69" 437.5 1024 1072 1104 1184 600 603 613 619 +HSync -VSync
+refresh, modeline = (
+    59.69,
+    "1024 1072 1104 1184 600 603 613 619 +HSync -VSync",
+)
+# CVT-RBv2
+# Modeline "1024x600_60" 409.36 1024 1032 1064 1104 600 604 612 618 +HSync -VSync
+# refresh, modeline = (
+#     60,
+#     "1024 1032 1064 1104 600 604 612 618 +HSync -VSync",
+# )
+
+# CVT
+# Modeline "1024x600_29.66" 235 1024 1056 1152 1280 600 603 613 619 -HSync +VSync
+refresh, modeline = (
+    29.66,
+    "1024 1056 1152 1280 600 603 613 619 -HSync +VSync",
+)
 
 modeline = modeline.split()
-hsync = {"-hsync": False, "+hsync": True}[modeline[-2]]
-vsync = {"-vsync": False, "+vsync": True}[modeline[-1]]
+hsync = {"-hsync": False, "+hsync": True}[modeline[-2].lower()]
+vsync = {"-vsync": False, "+vsync": True}[modeline[-1].lower()]
 (hdisplay, hsyncstart, hsyncend, htotal,
  vdisplay, vsyncstart, vsyncend, vtotal) = map(int, modeline[:-2])
 
@@ -58,4 +80,4 @@ print(f"\t.v_back_porch    = {vtotal - vsyncend},")
 print(f"\t.v_active_lines  = {vdisplay},")
 print()
 print(f"\t.bit_clk_khz     = {int(htotal * vtotal * refresh * 10 / 1000)}")
-print(f"\t.bit_clk_khz     = {int(43.75 * 10 * 1000)}")
+print(f"\t.bit_clk_khz     = {int(235 * 1000)}")

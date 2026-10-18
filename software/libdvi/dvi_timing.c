@@ -164,7 +164,7 @@ const struct dvi_timing __dvi_const(dvi_timing_1024x600p_60hz) = {
 	.bit_clk_khz     = 245450
 };
 
-// 1024x600p 30 Hz (likely not an official mode, I just used the
+// 1024x600p 30 Hz (from that website)
 // output of `cvt 1024 600 30`), 235 MHz bit clock
 const struct dvi_timing __dvi_const(dvi_timing_1024x600p_30hz) = {
 	.h_sync_polarity = false,
@@ -176,10 +176,10 @@ const struct dvi_timing __dvi_const(dvi_timing_1024x600p_30hz) = {
 	.v_sync_polarity = true,
 	.v_front_porch   = 3,
 	.v_sync_width    = 10,
-	.v_back_porch    = 3,
+	.v_back_porch    = 6,
 	.v_active_lines  = 600,
 
-	.bit_clk_khz     = 235200
+	.bit_clk_khz     = 235000
 };
 
 // Note this is NOT the correct 720p30 CEA mode, but rather 720p60 run at half
@@ -202,24 +202,42 @@ const struct dvi_timing __dvi_const(dvi_timing_1280x720p_30hz) = {
 	.bit_clk_khz       = 372000
 };
 
-// Reduced-blanking 1024x600p 60 Hz (likely not an official mode, I just
+// Reduced-blanking (v2) 1024x600p 60 Hz
+// from  https://www.ultrasemi.com/en/tool/video_timing_calculator
+const struct dvi_timing __dvi_const(dvi_timing_1024x600p_reduced2_60hz) = {
+	.h_sync_polarity = true,
+	.h_front_porch   = 8,
+	.h_sync_width    = 32,
+	.h_back_porch    = 40,
+	.h_active_pixels = 1024,
+
+	.v_sync_polarity = false,
+	.v_front_porch   = 4,
+	.v_sync_width    = 8,
+	.v_back_porch    = 6,
+	.v_active_lines  = 600,
+
+	//.bit_clk_khz     = 409363
+	.bit_clk_khz     = 409360
+};
+
+// Reduced-blanking 1024x600p 60 Hz from that website
 // used the output of `cvt --reduced 1024 600 60`), 438 MHz bit clock
 const struct dvi_timing __dvi_const(dvi_timing_1024x600p_reduced_60hz) = {
-        .h_sync_polarity = true,
-        .h_front_porch   = 48,
-        .h_sync_width    = 32,
-        .h_back_porch    = 80,
-        .h_active_pixels = 1024,
+	.h_sync_polarity = true,
+	.h_front_porch   = 48,
+	.h_sync_width    = 32,
+	.h_back_porch    = 80,
+	.h_active_pixels = 1024,
 
-        .v_sync_polarity = false,
-        .v_front_porch   = 3,
-        .v_sync_width    = 10,
-        .v_back_porch    = 6,
-        .v_active_lines  = 600,
+	.v_sync_polarity = false,
+	.v_front_porch   = 3,
+	.v_sync_width    = 10,
+	.v_back_porch    = 6,
+	.v_active_lines  = 600,
 
-        //.bit_clk_khz     = 437465
-        //.bit_clk_khz     = 218750
-        .bit_clk_khz     = 228000
+	//.bit_clk_khz     = 437465
+	.bit_clk_khz     = 437500
 };
 
 // Reduced-blanking (CVT) 720p. You aren't supposed to use reduced blanking
