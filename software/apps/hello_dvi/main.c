@@ -12,13 +12,17 @@
 #include "dvi_serialiser.h"
 #include "common_dvi_pin_configs.h"
 
-#include "testcard_400x300_rgb565.h"
+#include "testcard_512x300_rgb565.h"
 
-// DVDD 1.25V
-#define FRAME_WIDTH 400
-#define FRAME_HEIGHT 300
+// DVDD 1.2V (1.1V seems ok too)
+#define FRAME_WIDTH 256
+#define FRAME_HEIGHT 150
 #define VREG_VSEL VREG_VOLTAGE_1_25
-#define DVI_TIMING dvi_timing_800x600p_reduced_60hz
+//#define DVI_TIMING dvi_timing_800x480p_60hz // works, 295200 bit clock 1.2V
+//#define DVI_TIMING dvi_timing_800x600p_reduced_60hz // 354000, needs 1.25V
+//#define DVI_TIMING dvi_timing_1024x600p_30hz // not even at 1.3V
+//#define DVI_TIMING dvi_timing_1024x600p_reduced_60hz // not even at 1.3V
+#define DVI_TIMING dvi_timing_512x300p_60hz // underclocked??
 
 struct dvi_inst dvi0;
 
@@ -51,7 +55,7 @@ int main() {
 	while (true) {
 		for (uint y = 0; y < FRAME_HEIGHT; ++y) {
 			uint y_scroll = (y + frame_ctr) % FRAME_HEIGHT;
-			const uint16_t *scanline = &((const uint16_t*)testcard_400x300)[y_scroll * FRAME_WIDTH];
+			const uint16_t *scanline = &((const uint16_t*)testcard_512x300)[y_scroll * FRAME_WIDTH];
 			queue_add_blocking_u32(&dvi0.q_colour_valid, &scanline);
 			while (queue_try_remove_u32(&dvi0.q_colour_free, &scanline))
 				;
