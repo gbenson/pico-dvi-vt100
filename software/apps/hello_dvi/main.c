@@ -15,14 +15,15 @@
 #include "testcard_512x300_rgb565.h"
 
 // DVDD 1.2V (1.1V seems ok too)
-#define FRAME_WIDTH 256
-#define FRAME_HEIGHT 150
-#define VREG_VSEL VREG_VOLTAGE_1_25
+#define FRAME_WIDTH 512
+#define FRAME_HEIGHT 300
+#define VREG_VSEL VREG_VOLTAGE_1_20
 //#define DVI_TIMING dvi_timing_800x480p_60hz // works, 295200 bit clock 1.2V
 //#define DVI_TIMING dvi_timing_800x600p_reduced_60hz // 354000, needs 1.25V
 //#define DVI_TIMING dvi_timing_1024x600p_30hz // not even at 1.3V
 //#define DVI_TIMING dvi_timing_1024x600p_reduced_60hz // not even at 1.3V
-#define DVI_TIMING dvi_timing_512x300p_60hz // underclocked??
+//#define DVI_TIMING dvi_timing_512x300p_60hz // underclocked??
+#define DVI_TIMING dvi_timing_1024x600p_60hz // displayed "NO SUPPORT" ?!
 
 struct dvi_inst dvi0;
 

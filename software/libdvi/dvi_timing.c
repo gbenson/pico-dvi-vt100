@@ -11,7 +11,7 @@
 #define __dvi_func(x) __not_in_flash_func(x)
 #define __dvi_const(x) __not_in_flash_func(x)
 
-// 512x300p 60 Hz, from the output of `cvt 512 300 60` (120 MHz)
+// 512x300p 60 Hz, from the output of `cvt 512 300 60` (240 MHz)
 const struct dvi_timing __dvi_const(dvi_timing_512x300p_60hz) = {
 	.h_sync_polarity = false,
 	.h_front_porch   = 16,
@@ -25,7 +25,7 @@ const struct dvi_timing __dvi_const(dvi_timing_512x300p_60hz) = {
 	.v_back_porch    = 3,
 	.v_active_lines  = 300,
 
-	.bit_clk_khz     = 120000
+	.bit_clk_khz     = 240000
 };
 
 // VGA -- we do this mode properly, with a pretty comfortable clk_sys (252 MHz)
@@ -132,6 +132,37 @@ const struct dvi_timing __dvi_const(dvi_timing_960x540p_60hz) = {
 	.v_active_lines    = 540,
 
 	.bit_clk_khz       = 372000
+};
+
+// 1024x600p 60 Hz, straight out of chatgpt except I halved the bit clock
+// | Parameter              | Value    |
+// | ---------------------- | -------- |
+// | Horizontal active      | 1024     |
+// | Horizontal front porch | 140      |
+// | Horizontal sync width  | 20       |
+// | Horizontal back porch  | 160      |
+// | Horizontal total       | 1344     |
+// | Vertical active        | 600      |
+// | Vertical front porch   | 12       |
+// | Vertical sync width    | 3        |
+// | Vertical back porch    | 20       |
+// | Vertical total         | 635      |
+// | Pixel clock            | 51.2 MHz |
+// | Refresh rate           | 60.0 Hz  |
+const struct dvi_timing __dvi_const(dvi_timing_1024x600p_60hz) = {
+	.h_sync_polarity = false,
+	.h_front_porch   = 140,
+	.h_sync_width    = 20,
+	.h_back_porch    = 160,
+	.h_active_pixels = 1024,
+
+	.v_sync_polarity = true,
+	.v_front_porch   = 12,
+	.v_sync_width    = 3,
+	.v_back_porch    = 20,
+	.v_active_lines  = 600,
+
+	.bit_clk_khz     = 256000
 };
 
 // 1024x600p 30 Hz (likely not an official mode, I just used the
