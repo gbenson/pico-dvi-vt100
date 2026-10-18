@@ -150,13 +150,13 @@ const struct dvi_timing __dvi_const(dvi_timing_960x540p_60hz) = {
 // | Pixel clock            | 51.2 MHz |
 // | Refresh rate           | 60.0 Hz  |
 const struct dvi_timing __dvi_const(dvi_timing_1024x600p_60hz) = {
-	.h_sync_polarity = false,
+	.h_sync_polarity = true,
 	.h_front_porch   = 140,
 	.h_sync_width    = 20,
 	.h_back_porch    = 160,
 	.h_active_pixels = 1024,
 
-	.v_sync_polarity = true,
+	.v_sync_polarity = false,
 	.v_front_porch   = 12,
 	.v_sync_width    = 3,
 	.v_back_porch    = 20,
@@ -219,7 +219,8 @@ const struct dvi_timing __dvi_const(dvi_timing_1024x600p_reduced_60hz) = {
         .v_active_lines  = 600,
 
         //.bit_clk_khz     = 437465
-        .bit_clk_khz     = 437500
+        //.bit_clk_khz     = 218750
+        .bit_clk_khz     = 228000
 };
 
 // Reduced-blanking (CVT) 720p. You aren't supposed to use reduced blanking

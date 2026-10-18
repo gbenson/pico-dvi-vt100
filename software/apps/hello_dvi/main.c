@@ -24,6 +24,7 @@
 //#define DVI_TIMING dvi_timing_1024x600p_reduced_60hz // not even at 1.3V
 //#define DVI_TIMING dvi_timing_512x300p_60hz // underclocked??
 #define DVI_TIMING dvi_timing_1024x600p_60hz // displayed "NO SUPPORT" ?!
+//#define DVI_TIMING dvi_timing_1024x600p_reduced_60hz // more like 30Hz now
 
 struct dvi_inst dvi0;
 
