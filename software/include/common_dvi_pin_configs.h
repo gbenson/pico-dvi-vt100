@@ -126,4 +126,13 @@ static const struct dvi_serialiser_cfg olimex_rp2040_cfg = {
     .invert_diffpairs = true
 };
 
+// Waveshare PICO-DVI-7inch, PICO-DVI-10inch
+static const struct dvi_serialiser_cfg waveshare_pico_dvi_cfg = {
+	.pio = DVI_DEFAULT_PIO_INST,
+	.sm_tmds = {0, 1, 2},
+	.pins_tmds = {10, 12, 14},
+	.pins_clk = 8,
+	.invert_diffpairs = true
+};
+
 #endif
